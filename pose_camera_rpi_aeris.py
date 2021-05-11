@@ -129,8 +129,15 @@ def main():
         import pdb
         pdb.set_trace()
         frame=frame.reshape(-1)
-        inf_res=engine.run_inference(frame)
-        print(inf_res)
+        engine.run_inference(frame)
+        outputs, inference_time = engine.ParseOutput()
+        svg_canvas = svgwrite.Drawing('', size=src_size)
+        for pose in outputs:
+                draw_pose(svg_canvas, pose, src_size, inference_box)
+
+
+        # print(inf_res)
+
 
     # gstreamer.run_pipeline(partial(inf_callback, engine), partial(render_callback, engine),
     #                        src_size, inference_size,
