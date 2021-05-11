@@ -129,7 +129,8 @@ def main():
         import pdb
         pdb.set_trace()
         frame=frame.reshape(-1)
-        engine.run_inference(frame)
+        inf_res=engine.run_inference(frame)
+        print(inf_res)
 
     # gstreamer.run_pipeline(partial(inf_callback, engine), partial(render_callback, engine),
     #                        src_size, inference_size,
