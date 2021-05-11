@@ -356,6 +356,7 @@ def run_pipeline(inf_callback, render_callback, src_size,
     SINK_CAPS = 'video/x-raw,format=RGB,width={width},height={height}'
     LEAKY_Q = 'queue max-size-buffers=1 leaky=downstream'
     direction = 'horiz' if mirror else 'identity'
+    direction = '180'# if mirror else 'identity'
 
     src_caps = SRC_CAPS.format(width=src_size[0], height=src_size[1])
     sink_caps = SINK_CAPS.format(width=inference_size[0], height=inference_size[1])

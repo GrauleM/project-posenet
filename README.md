@@ -13,7 +13,7 @@ when it should actually be in `posenet_lib/armv7l`. Easy fix: `cp -r armv7a/ arm
 
 ## rpi video
 followed this to make sure the video works over ssh
-https://github.com/google-coral/project-posenet/issues/26
+https://github.com/google-coral/project-posenet/issues/26 - still does not work over ssh
 
 # Original readme below
 # Coral PoseNet
