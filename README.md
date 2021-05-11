@@ -11,6 +11,11 @@ AttributeError: 'Delegate' object has no attribute '_library'
 This is caused by a mistake in the default install path for posenet_decoder.so; this file is put into `posenet_lib/armv7a`, 
 when it should actually be in `posenet_lib/armv7l`. Easy fix: `cp -r armv7a/ armv7l/`
 
+## rpi video
+followed this to make sure the video works over ssh
+https://github.com/google-coral/project-posenet/issues/26
+
+# Original readme below
 # Coral PoseNet
 
 Pose estimation refers to computer vision techniques that detect human figures
