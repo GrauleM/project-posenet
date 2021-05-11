@@ -121,7 +121,7 @@ def main():
     engine = PoseEngine(model)
     input_shape = engine.get_input_tensor_shape()
     inference_size = (input_shape[2], input_shape[1])
-    vs = VideoStream(usePiCamera=True, resolution=args.res, vflip=True).start()
+    vs = VideoStream(usePiCamera=True, resolution=src_size, vflip=True).start()
     time.sleep(2.0)
     while True:
         # grab the frame from the threaded video stream
