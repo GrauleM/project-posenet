@@ -1,3 +1,16 @@
+# Warning: library path error
+As of May 11, 2021, following the default install instructions for Raspberry Pi 4 results in the following error: 
+```
+OSError: posenet_lib/armv7l/posenet_decoder.so: cannot open shared object file: No such file or directory
+Exception ignored in: <function Delegate.__del__ at 0xb01c4858>
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/tflite_runtime/interpreter.py", line 116, in __del__
+    if self._library is not None:
+AttributeError: 'Delegate' object has no attribute '_library'
+```
+This is caused by a mistake in the default install path for posenet_decoder.so; this file is put into `posenet_lib/armv7a`, 
+when it should actually be in `posenet_lib/armv7l`. Easy fix: `cp -r armv7a/ armv7l/`
+
 # Coral PoseNet
 
 Pose estimation refers to computer vision techniques that detect human figures
