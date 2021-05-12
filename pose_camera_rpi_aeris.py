@@ -123,6 +123,7 @@ def main():
     parser.add_argument('--videosrc', help='Which video source to use', default='/dev/video0')
     parser.add_argument('--h264', help='Use video/x-h264 input', action='store_true')
     parser.add_argument('--jpeg', help='Use image/jpeg input', action='store_true')
+    parser.add_argument('--headless', help='Whether to run in headless mode or not', default=False)
     args = parser.parse_args()
 
     default_model = 'models/mobilenet/posenet_mobilenet_v1_075_%d_%d_quant_decoder_edgetpu.tflite'
@@ -158,15 +159,16 @@ def main():
         engine.run_inference(frame)
         outputs, inference_time = engine.ParseOutput()
 
-        for pose in outputs:
-            # todo: inference_box= is wrong/hardcoded for medium resolution; double check
-            draw_pose_cv2(frame_orig, pose, src_size, inference_box=inf_box)
+        if not args.headless:
+            for pose in outputs:
+                # todo: inference_box= is wrong/hardcoded for medium resolution; double check
+                draw_pose_cv2(frame_orig, pose, src_size, inference_box=inf_box)
 
-        cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
-        cv2.waitKey(
-            1
-        )
-        print(f"fps inference: {1/inference_time}; fps overall: {1/(time.time()-start_time)}")
+            cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
+            cv2.waitKey(
+                1
+            )
+            print(f"fps inference: {1/inference_time}; fps overall: {1/(time.time()-start_time)}")
 
 
     # gstreamer.run_pipeline(partial(inf_callback, engine), partial(render_callback, engine),
