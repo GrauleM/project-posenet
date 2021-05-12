@@ -113,6 +113,15 @@ def avg_fps_counter(window_size):
         prev = curr
         yield len(window) / sum(window)
 
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -123,7 +132,8 @@ def main():
     parser.add_argument('--videosrc', help='Which video source to use', default='/dev/video0')
     parser.add_argument('--h264', help='Use video/x-h264 input', action='store_true')
     parser.add_argument('--jpeg', help='Use image/jpeg input', action='store_true')
-    parser.add_argument('--headless', help='Whether to run in headless mode or not', default=False)
+    parser.add_argument('--headless', help='Activate headless mode', type=str2bool, nargs='?',
+                        const=True, default=False)
     args = parser.parse_args()
 
     default_model = 'models/mobilenet/posenet_mobilenet_v1_075_%d_%d_quant_decoder_edgetpu.tflite'
