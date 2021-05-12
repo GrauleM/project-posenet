@@ -122,8 +122,8 @@ def main():
     while True:
         # grab the frame from the threaded video stream
         frame_orig = vs.read()
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
         frame=frame_orig.reshape(-1)
         engine.run_inference(frame)
         outputs, inference_time = engine.ParseOutput()
