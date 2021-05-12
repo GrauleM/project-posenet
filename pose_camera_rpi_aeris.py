@@ -153,13 +153,11 @@ def main():
         frame=frame_orig.reshape(-1)
         engine.run_inference(frame)
         outputs, inference_time = engine.ParseOutput()
-        svg_canvas = svgwrite.Drawing('', size=src_size)
 
         for pose in outputs:
             # todo: inference_box= is wrong/hardcoded for medium resolution; double check
-            draw_pose(svg_canvas, pose, src_size, inference_box=(0,0,641,480))
+            draw_pose(frame_orig, pose, src_size, inference_box=(0,0,641,480))
 
-        added_image = cv2.addWeighted(frame_orig, 0.4, overlay, 0.1, 0)
         cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
         cv2.waitKey(
             1
