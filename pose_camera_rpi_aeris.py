@@ -129,14 +129,17 @@ def main():
     if args.res == '480x360':
         src_size = (640, 480)
         appsink_size = (480, 360)
+        inf_box = (0, 0, 481, 353) # todo: this value may be off; also should not be hardcoded
         model = args.model or default_model % (353, 481)
     elif args.res == '640x480':
         src_size = (640, 480)
         appsink_size = (640, 480)
+        inf_box = (0, 0, 641, 480) # todo: this value may be off; also should not be hardcoded
         model = args.model or default_model % (481, 641)
     elif args.res == '1280x720':
         src_size = (1280, 720)
         appsink_size = (1280, 720)
+        inf_box = (0, 0, 1281, 720) # todo: this value may be off; also should not be hardcoded
         model = args.model or default_model % (721, 1281)
 
     print('Loading model: ', model)
@@ -157,7 +160,7 @@ def main():
 
         for pose in outputs:
             # todo: inference_box= is wrong/hardcoded for medium resolution; double check
-            draw_pose_cv2(frame_orig, pose, src_size, inference_box=(0,0,641,480))
+            draw_pose_cv2(frame_orig, pose, src_size, inference_box=inf_box)
 
         cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
         cv2.waitKey(
