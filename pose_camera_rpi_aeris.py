@@ -156,7 +156,7 @@ def main():
 
         for pose in outputs:
             # todo: inference_box= is wrong/hardcoded for medium resolution; double check
-            draw_pose(frame_orig, pose, src_size, inference_box=(0,0,641,480))
+            draw_pose_cv2(frame_orig, pose, src_size, inference_box=(0,0,641,480))
 
         cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
         cv2.waitKey(
