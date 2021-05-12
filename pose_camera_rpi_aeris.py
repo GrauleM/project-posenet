@@ -76,6 +76,32 @@ def draw_pose(dwg, pose, src_size, inference_box, color='yellow', threshold=0.2)
         dwg.add(dwg.line(start=(ax, ay), end=(bx, by), stroke=color, stroke_width=2))
 
 
+def draw_pose_cv2(image, pose, src_size, inference_box, color='yellow', threshold=0.2):
+    box_x, box_y, box_w, box_h = inference_box
+    scale_x, scale_y = src_size[0] / box_w, src_size[1] / box_h
+    xys = {}
+    for label, keypoint in pose.keypoints.items():
+        if keypoint.score < threshold: continue
+        # Offset and scale to source coordinate space.
+        kp_x = int((keypoint.point[0] - box_x) * scale_x)
+        kp_y = int((keypoint.point[1] - box_y) * scale_y)
+
+        xys[label] = (kp_x, kp_y)
+        # dwg.add(dwg.circle(center=(int(kp_x), int(kp_y)), r=5,
+        #                    fill='cyan', fill_opacity=keypoint.score, stroke=color))
+        #
+        # cv2.circle(image)
+
+    for a, b in EDGES:
+        if a not in xys or b not in xys: continue
+        ax, ay = xys[a]
+        bx, by = xys[b]
+        # dwg.add(dwg.line(start=(ax, ay), end=(bx, by), stroke=color, stroke_width=2))
+        cv2.line(image,start_point=(ax, ay), end_point=(bx, by), stroke=color, stroke_width=2)
+
+    return image
+
+
 def avg_fps_counter(window_size):
     window = collections.deque(maxlen=window_size)
     prev = time.monotonic()
@@ -133,6 +159,7 @@ def main():
             # todo: inference_box= is wrong/hardcoded for medium resolution; double check
             draw_pose(svg_canvas, pose, src_size, inference_box=(0,0,641,480))
 
+        added_image = cv2.addWeighted(frame_orig, 0.4, overlay, 0.1, 0)
         cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
         cv2.waitKey(
             1
