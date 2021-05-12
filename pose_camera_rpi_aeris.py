@@ -163,7 +163,7 @@ def main():
         cv2.waitKey(
             1
         )
-        print(f"fps inference: {1/inference_time}; fps overall: {1/(start_time-time.time())}")
+        print(f"fps inference: {1/inference_time}; fps overall: {1/(time.time()-start_time)}")
 
 
     # gstreamer.run_pipeline(partial(inf_callback, engine), partial(render_callback, engine),
