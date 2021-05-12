@@ -27,6 +27,7 @@ from pose_engine import PoseEngine
 from pose_engine import KeypointType
 
 from imutils.video import VideoStream
+import cv2
 
 
 EDGES = (
@@ -132,10 +133,15 @@ def main():
         engine.run_inference(frame)
         outputs, inference_time = engine.ParseOutput()
         svg_canvas = svgwrite.Drawing('', size=src_size)
+
         for pose in outputs:
-                draw_pose(svg_canvas, pose, src_size, inference_box)
+            # todo: inference_box= is wrong/hardcoded for medium resolution; double check
+            draw_pose(svg_canvas, pose, src_size, inference_box=(0,0,641,480))
 
-
+        cv2.imshow("Pan-Tilt Face Tracking", frame)
+        cv2.waitKey(
+            1
+        )
         # print(inf_res)
 
 
