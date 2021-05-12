@@ -97,7 +97,7 @@ def draw_pose_cv2(image, pose, src_size, inference_box, color='yellow', threshol
         ax, ay = xys[a]
         bx, by = xys[b]
         # dwg.add(dwg.line(start=(ax, ay), end=(bx, by), stroke=color, stroke_width=2))
-        cv2.line(image,start_point=(ax, ay), end_point=(bx, by), stroke=color, stroke_width=2)
+        cv2.line(image,(ax, ay), (bx, by), color, 2)
 
     return image
 
