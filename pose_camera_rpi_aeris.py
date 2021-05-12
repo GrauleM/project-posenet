@@ -14,14 +14,9 @@
 
 import argparse
 import collections
-from functools import partial
-import re
 import time
 
-import numpy as np
-from PIL import Image
 import svgwrite
-import gstreamer_rpi as gstreamer
 
 from pose_engine import PoseEngine
 from pose_engine import KeypointType
