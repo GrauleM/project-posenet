@@ -121,10 +121,10 @@ def main():
     time.sleep(2.0)
     while True:
         # grab the frame from the threaded video stream
-        frame = vs.read()
+        frame_orig = vs.read()
         import pdb
         pdb.set_trace()
-        frame=frame.reshape(-1)
+        frame=frame_orig.reshape(-1)
         engine.run_inference(frame)
         outputs, inference_time = engine.ParseOutput()
         svg_canvas = svgwrite.Drawing('', size=src_size)
@@ -133,7 +133,7 @@ def main():
             # todo: inference_box= is wrong/hardcoded for medium resolution; double check
             draw_pose(svg_canvas, pose, src_size, inference_box=(0,0,641,480))
 
-        cv2.imshow("Pan-Tilt Face Tracking", frame)
+        cv2.imshow("Pan-Tilt Face Tracking", frame_orig)
         cv2.waitKey(
             1
         )
