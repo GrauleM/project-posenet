@@ -146,6 +146,7 @@ def main():
     vs = VideoStream(usePiCamera=True, resolution=inference_size, vflip=True).start()
     time.sleep(2.0)
     while True:
+        start_time=time.time()
         # grab the frame from the threaded video stream
         frame_orig = vs.read()
         # import pdb
@@ -162,7 +163,7 @@ def main():
         cv2.waitKey(
             1
         )
-        print(f"fps: {1/inference_time}")
+        print(f"fps inference: {1/inference_time}; fps overall: {1/(start_time-time.time())}")
 
 
     # gstreamer.run_pipeline(partial(inf_callback, engine), partial(render_callback, engine),

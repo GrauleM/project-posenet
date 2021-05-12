@@ -9,7 +9,7 @@ Traceback (most recent call last):
 AttributeError: 'Delegate' object has no attribute '_library'
 ```
 This is caused by a mistake in the default path for posenet_decoder.so; this file is put into `posenet_lib/armv7a`, 
-when it should actually be in `posenet_lib/armv7l`. Easy fix: `cp -r armv7a/ armv7l/`
+when it should actually be in `posenet_lib/armv7l`. Easy fix is to rename or copy the folder to have the correct name: `cp -r armv7a/ armv7l/`
 
 ## rpi video
 followed this to make sure the video works over ssh
