@@ -162,7 +162,7 @@ def main():
         cv2.waitKey(
             1
         )
-        print(inference_time)
+        print(f"fps: {1/inference_time}")
 
 
     # gstreamer.run_pipeline(partial(inf_callback, engine), partial(render_callback, engine),
