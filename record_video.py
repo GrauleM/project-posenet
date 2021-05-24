@@ -6,7 +6,7 @@ camera.start_preview()      # You will see a preview window while recording
 print("start recording in 5s")
 sleep(5)
 print("start recording")
-camera.start_recording('/home/pi/Desktop/video_1280x720.h264') # Video will be saved at desktop
+camera.start_recording('/home/pi/Desktop/video_1280x720.h264', format='h264', level='4.2') # Video will be saved at desktop; level='4.2' is required for high framerate
 for i in range(60):
     print(f"{i} seconds")
     sleep(1)
