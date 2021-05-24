@@ -7,8 +7,8 @@ print("start recording in 5s")
 sleep(5)
 print("start recording")
 camera.start_recording('/home/pi/Desktop/video_640x480.h264') # Video will be saved at desktop
-# for i in range(60):
-#     print(f"{i} seconds")
-#     sleep(1)
+for i in range(60):
+    print(f"{i} seconds")
+    sleep(1)
 camera.stop_recording()
 camera.stop_preview()
